@@ -1,0 +1,10 @@
+server {
+           listen 8008;
+           root /usr/share/graphite-web/;
+           error_log  /var/log/nginx/error.log;
+
+           location / {
+                uwsgi_pass  127.0.0.1:3031;
+                include uwsgi_params;
+   }
+}

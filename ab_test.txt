@@ -1,1 +1,0 @@
-ab -n 100000 -c 100 -g ab_result.txt http://192.168.10.130/forum/
