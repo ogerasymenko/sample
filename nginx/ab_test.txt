@@ -1,1 +1,1 @@
-ab -n 100000 -c 100 http://192.168.10.130/forum/
+ab -n 100000 -c 100 http://192.168.10.130/html/index.html
