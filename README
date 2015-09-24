@@ -6,14 +6,8 @@
 
 Maintainer: Alexandr Gerasymenko
 
-In this demo repository you find full version of my CV (which, frankly speaking, I'm prepared for
-one of Dnipropetrovsk outsourcing companies, but requirements are mismatch with my skill's, so I'm
-keep search for a job where I can apply my knowledges and be helpful for the team), modified file 
-sysctl.conf, my nginx configuration and apache benchmark result for this system, script for view 
-general system information, folder with screen-shots various services which I tested on my VM.
-
-Also I'm write some like a essay "Everybody Need's DevOps" about DevOps, high availability and 
-performance but think here is too much text to read, so if you will be interested in my candidature
-we can discuss about it at the interview.
+In this demo repository you can find modified file sysctl.conf, my nginx configuration and apache 
+benchmark result for this system, script for view general system information, folder with 
+screen-shots various services which I tested on my VM.
 
 Have a nice time! 
