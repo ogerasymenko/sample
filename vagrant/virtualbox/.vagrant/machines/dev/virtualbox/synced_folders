@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/html":{"create":true,"guestpath":"/home/vagrant/html","hostpath":"C:/DockerTest/devops/html","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/DockerTest/devops/packer-templates/virtualbox.save","disabled":false,"__vagrantfile":true}}}

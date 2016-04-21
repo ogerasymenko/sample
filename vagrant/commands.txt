@@ -1,0 +1,8 @@
+1. Install VirtualBox
+2. Install Vagrant
+3. Install Packer
+4. Install git
+5. run `packer build -only=virtualbox-iso application-server.json`
+6. run `cd virtualbox`
+7. run `vagrant box add ubuntu-14.04.4-server-amd64-appserver_virtualbox.box --name appserver`
+8. run `vagrant up`
