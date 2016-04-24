@@ -1,0 +1,39 @@
+SELECT version();
+SHOW VARIABLES LIKE '%char%';
+SHOW VARIABLES LIKE 'default_storage_engine';
+
+CREATE DATABASE dynamic_cols CHARSET UTF8;
+USE dynamic_cols;
+
+CREATE TABLE items (
+item_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(72) NOT NULL,
+title VARCHAR(255) NOT NULL,
+price DECIMAL(5,2) NOT NULL,
+manufacturer VARCHAR(64) NOT NULL,
+extra BLOB);
+
+INSERT INTO items SET type='CD', title='My 1st CD', price=9.99, manufacturer='Universal Music';
+INSERT INTO items SET type='T-Shirt', title='OpenSQL-Camp', price=19.99, manufacturer='O'neill', extra=COLUMN_CREATE('color','green','size','L');
+INSERT INTO items SET type='T-Shirt', title='OpenSQL-Camp', price=19.99, manufacturer='Oneill', extra=COLUMN_CREATE('color','yellow','size','XL');
+INSERT INTO items SET type='DVD', title='Sample DVD', price=9.99, manufacturer='1+1 Media', extra=COLUMN_CREATE('rating','PG');
+SELECT type, title, COLUMN_GET(extra,'color' as CHAR) FROM items WHERE COLUMN_EXISTS(extra,'color');
+SELECT DISTINCT(COLUMN_GET(extra,'color' as CHAR)) FROM items WHERE COLUMN_EXISTS(extra,'color');
+
+SELECT title, type, COLUMN_JSON(extra) FROM items;
+
+UPDATE items SET extra=COLUMN_CREATE('year',2000) WHERE type='DVD'; перезапишет информацию
+UPDATE items SET extra=COLUMN_ADD(extra,'rating','PG','color','black') WHERE type='DVD'; добавит к существующему
+UPDATE items SET extra=COLUMN_ADD(extra,'color','black-and-white') WHERE type='DVD'; поменять одну позицию
+UPDATE items SET extra=COLUMN_DELETE(extra,'color') WHERE type='DVD'; убрать одну позицию
+
+UPDATE items SET extra=COLUMN_ADD(extra,'in stock',10) WHERE title='My 1st CD';
+UPDATE items SET extra=COLUMN_CREATE('in stock',10) WHERE COLUMN_CHECK(extra) IS NULL;
+SELECT title, type, COLUMN_JSON(extra) FROM items;
+UPDATE items SET extra=COLUMN_ADD(extra,'in stock',10) WHERE COLUMN_CHECK(extra)=1;
+SELECT title, type, COLUMN_CHECK(extra), COLUMN_JSON(extra) FROM items WHERE 1=1;
+
+UPDATE items SET extra=COLUMN_ADD(extra,'chapters',COLUMN_CREATE('Chapter 1','The Beginning','Chapter 2','The Middle', 'Chapter 3','The End')) WHERE type='DVD';
+SET @tracks=COLUMN_CREATE('Track 1','First Song','Track 2','Second song','Track 3','Last song');
+UPDATE items SET extra=COLUMN_ADD(extra,'tracks',@tracks) WHERE type='CD';
+SELECT COLUMN_GET(COLUMN_GET(extra,'tracks' as CHAR), 'Track 2' as CHAR) FROM items WHERE type='CD';
