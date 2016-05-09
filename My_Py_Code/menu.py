@@ -1,3 +1,6 @@
+name = None
+
+# бесконечный цикл
 while True:
     print('Меню:')
     print('1. Ввести имя')
@@ -10,13 +13,12 @@ while True:
     if response == '1':
         name = input('Введите ваше имя: ')
     elif response == '2':
-        if name:  # здороваемся с пользователем, если имя уже введено
+        if name:
             print('Привет, ', name, '!', sep='')
         else:
             print('Я не знаю вашего имени.')
     elif response == '3':
-               # оператор break завершает выполнение цикла
-        break  # если пользователь выбрал третий пункт, то выходим из цикла
+            break
     else:
         print('Неверный ввод.')
 
