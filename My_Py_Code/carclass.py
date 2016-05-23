@@ -50,7 +50,7 @@ while True:
         print()
 
     elif response == '3':
-        item = 'item' + str(len(all_items))
+        item = 'item' + (str((len(all_items)) + 1))
         input_brand = input('Введите название производителя: ')
         input_model = input('Введите название модели: ')
         input_engine = input('Введите тип двигателя: ')
