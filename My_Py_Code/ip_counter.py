@@ -12,20 +12,21 @@ def print_error():
     print("Please check, what file exists and have 'read' permission for 'other' group")
 
 c = get_cwd()
+
 print()
 
 ip_regex = re.compile(r"\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 
 s = set()
 
-file_s = open(log_file)
-
 try:
+    file_s = open(log_file)
     for line in file_s:
         a = re.search(ip_regex, line)
         b = a.group()
         s.add(b)
-        
+    file_s.close()
+
     arr = list(s)
     arr.sort()
 
@@ -37,7 +38,3 @@ try:
 
 except (IsADirectoryError, FileNotFoundError, PermissionError):
     print_error()
-
-finally:
-    file_s.close()
-
