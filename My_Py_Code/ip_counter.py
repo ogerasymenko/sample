@@ -1,4 +1,7 @@
-import os, sys, re
+import os
+import re
+import sys
+
 
 log_file = "/var/log/nginx/access.log"
 
