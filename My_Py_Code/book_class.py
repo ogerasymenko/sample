@@ -2,6 +2,13 @@ __author__ = 'sashko'
 
 
 class Books:
+
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    WHITE = '\033[0m'
+
     arr = []
     feeds = []
 
@@ -11,6 +18,13 @@ class Books:
         self.category = category
         self.year = year
         self.quantity = quantity
+
+    def colors(self):
+        self.BLUE = ''
+        self.GREEN = ''
+        self.YELLOW = ''
+        self.RED = ''
+        self.WHITE = ''
 
     def add_feedback(self):
         name = input('Input your name: ')
@@ -38,19 +52,21 @@ class Books:
     def sale_book(self):
         items = self.quantity
         if items == 0:
-            print('Sold out!')
+            print(Books.RED, 'Sold out!', Books.WHITE)
             print('=' * 19)
         elif items > 0:
-            print('{0} {1} {2}'.format('You can buy:', items, 'pcs.'))
+            print('{0} {1}{2}{3} {4}'.format('You can buy:', Books.GREEN, items, Books.WHITE, 'pcs.'))
             quantity = int(input('How many copies you want to buy? '))
             print()
 
             if 0 < quantity <= items:
-                print('Thank for buying', quantity, 'books!')
                 print('=' * 19)
+                print('Thank for buying ', Books.YELLOW, quantity, Books.WHITE, ' books!', sep='')
+                print('=' * 19)
+                print()
             elif quantity > items:
                 print('{0: <19} {1} {2}'.format('You can buy only:', items, 'pcs.'))
-                print('=' * 19)
+                print()
             else:
                 print('Incorrect input')
                 print()
@@ -69,9 +85,9 @@ class Books:
         print('{0: <19} {1}'.format('Publication year:', self.year))
 
         if self.quantity == 0:
-            print('{0: <19} {1}'.format('Available quantity:', 'Sold out!'))
+            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.RED, 'Sold out!', Books.WHITE))
         elif self.quantity > 0:
-            print('{0: <19} {1}'.format('Available quantity:', self.quantity))
+            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.GREEN, self.quantity, Books.WHITE))
 
         if len(Books.arr) == 0:
             print('{0: <19} {1}'.format('Latest feedback:', 'No feedback left yet.'))
@@ -92,7 +108,7 @@ def menu_list():
     print('Books list:')
     print()
     for i in all_books:
-        print(all_books.index(i) + 1, '. ', i.title, '.', sep='')
+        print(all_books.index(i) + 1, '. ', Books.BLUE, i.title, Books.WHITE, '.', sep='')
         i.print_info()
 
 
