@@ -53,7 +53,6 @@ class Books:
     def sale_book(self):
         items = self.quantity
         if items == 0:
-            print('=' * 19)
             print(Books.RED, 'Sold out!', Books.WHITE)
             print('=' * 19)
         elif items > 0:
@@ -67,9 +66,7 @@ class Books:
                 print('=' * 19)
                 print()
             elif quantity > items:
-                print('=' * 19)
                 print('{0: <19} {1}{2}{3} {4}'.format('You can buy only:', Books.RED, items, Books.WHITE, 'pcs.'))
-                print('=' * 19)
                 print()
                 return self.quantity
             else:
@@ -120,7 +117,7 @@ def menu_list():
 def select_book():
     number = int(input('Select book: '))
     index = number - 1
-    print('{0}{1} {2}{3}'.format(number, '.', all_books[index].book_title(), '.', sep=''))
+    print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
     all_books[index].print_info()
     all_books[index].sale_book()
 
@@ -128,7 +125,7 @@ def select_book():
 def feedback_selected():
     number = int(input('Select book: '))
     index = number - 1
-    print('{0}{1} {2}{3}'.format(number, '.', all_books[index].book_title(), '.', sep=''))
+    print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
     all_books[index].print_info()
     all_books[index].all_feedbacks()
 
@@ -136,7 +133,7 @@ def feedback_selected():
 def new_feedback_selected():
     number = int(input('Select book: '))
     index = number - 1
-    print('{0}{1} {2}{3}'.format(number, '.', all_books[index].book_title(), '.', sep=''))
+    print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
     all_books[index].print_info()
     all_books[index].add_feedback()
 
