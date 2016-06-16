@@ -61,7 +61,7 @@ for section in parser.sections():
     mysql_pass = parser.get(section, 'mysql_pass')
     mysql_backup_file = os.path.join(DB_BACKUPS_ROOT, parser.get(section, 'mysql_db') + '-' + today + '.sql')
 
-    print('Using: \nHOST: {}\nDB: {}\nUSER: {}'.format(mysql_host, mysql_db, mysql_user, mysql_pass))
+    print('Using: \nHOST: {}\nDB: {}\nUSER: {}\n'.format(mysql_host, mysql_db, mysql_user, mysql_pass))
 
     dump_cmd = ['mysqldump ' +
                 '--user={mysql_user} '.format(mysql_user=mysql_user) +
