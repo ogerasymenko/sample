@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-# cat wp_backup.ini 
-# [site.name]
+# To run this programm you need to create wp_backup.ini
+# with following content:
+# [your_site.name]
 # www_data = '/var/www/html/wordpress'
 # mysql_db = 'wordpress'
 # mysql_host = 'localhost'
@@ -21,7 +21,7 @@ TOOL_ROOT = '/home/sashko/Dev/MyCode'
 BACKUPS_ROOT = os.path.join(TOOL_ROOT, 'backup')
 WWW_BACKUPS_ROOT = os.path.join(BACKUPS_ROOT, 'www')
 DB_BACKUPS_ROOT = os.path.join(BACKUPS_ROOT, 'db')
-WEB_ROOT = '/var/www/wordpress/'
+WEB_ROOT = '/var/www/html/wordpress/'
 
 if os.access(BACKUPS_ROOT, os.F_OK) == False:
     os.mkdir('backup')
@@ -73,9 +73,3 @@ for section in parser.sections():
 
     dump = subprocess.Popen(dump_cmd, shell=True)
     dump.wait()
-
-
-
-
-
-
