@@ -35,6 +35,8 @@ if os.access(DB_BACKUPS_ROOT, os.F_OK) == False:
 config = os.path.join(TOOL_ROOT, 'wp_backup.ini')
 parser = configparser.ConfigParser()
 
+print()
+
 if len(parser.read(config)) == 0:
     raise Exception('ERROR: No config file {} found!'.format(config))
 
