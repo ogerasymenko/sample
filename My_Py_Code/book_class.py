@@ -1,5 +1,6 @@
 '''
-This program describes Books class, give possibility to add new book, buy a book, show books list with detail's,
+This program describes Books class, give possibility to add new book,
+buy a book, show books list with detail's,
 show and add feedback's to selected book.
 '''
 
@@ -33,8 +34,10 @@ class Books:
         # empty list for containing feedback's
         self.feeds = []
 
-    # define colors
     def colors(self):
+        '''
+        define colors
+        '''
         self.BLUE = ''
         self.GREEN = ''
         self.YELLOW = ''
@@ -42,8 +45,10 @@ class Books:
         self.PURPLE = ''
         self.WHITE = ''
 
-    # create method add_feedback
     def add_feedback(self):
+        '''
+        create method add_feedback
+        '''
         # ask user name for use it in feedback output
         name = input('Input your name: ')
         # ask to write feedback
@@ -53,20 +58,25 @@ class Books:
         self.feeds.append(feedback)
         print()
 
-    # create method for printing all feedback's
     def all_feedbacks(self):
+        '''
+        create method for printing all feedback's
+        '''
         # if feedback's list's are empty print 'No feedback left'
         if len(self.username) == 0:
             print('=' * 19)
-            print('{0}{1: <19}{2} {3}'.format(Books.PURPLE, 'Feedback\'s:', Books.WHITE, 'No feedback left yet.'))
+            print('{0}{1: <19}{2} {3}'.format(Books.PURPLE, 'Feedbacks:', Books.WHITE,
+                                              'No feedback left yet.'))
             print('=' * 19)
         # else print feedback's
         else:
             print('=' * 19)
-            print('{0}{1: <19}{2}'.format(Books.PURPLE, 'Feedback\'s:', Books.WHITE))
+            print('{0}{1: <19}{2}'.format(Books.PURPLE, 'Feedbacks:', Books.WHITE))
 
-            # creating function with 2 args, which will use with map function
             def myfunc(value_1, value_2):
+                '''
+                creating function with 2 args, which will use with map function
+                '''
                 print('User {0} write next feedback: {1}'.format(value_1, value_2))
 
             # by map function take items from list's with user name and his feedback
@@ -74,8 +84,10 @@ class Books:
             print('=' * 19)
         print()
 
-    # create method for sale book
     def sale_book(self):
+        '''
+        create method for sale book
+        '''
         # how many books we have
         items = self.quantity
         if items == 0:
@@ -85,7 +97,8 @@ class Books:
             print()
         elif items > 0:
             # print how many books available right now for sale
-            print('{0} {1}{2}{3} {4}'.format('You can buy:', Books.GREEN, items, Books.WHITE, 'pcs.'))
+            print('{0} {1}{2}{3} {4}'.format('You can buy:', Books.GREEN, items,
+                                             Books.WHITE, 'pcs.'))
             # fold input for correct input
             try:
                 quantity = int(input('How many copies you want to buy? '))
@@ -106,7 +119,8 @@ class Books:
                 print()
             elif quantity > items:
                 print('=' * 19)
-                print('{0: <19} {1}{2}{3} {4}'.format('You can buy only:', Books.RED, items, Books.WHITE, 'pcs.'))
+                print('{0: <19} {1}{2}{3} {4}'.format('You can buy only:', Books.RED, items,
+                                                      Books.WHITE, 'pcs.'))
                 print('=' * 19)
                 print()
                 return self.quantity
@@ -123,19 +137,26 @@ class Books:
         return self.quantity
 
     def book_title(self):
+        '''
+        return boock's title
+        '''
         return self.title
 
-    # define method for print detail information about book
     def print_info(self):
+        '''
+        define method for print detail information about book
+        '''
         print('{0: <19} {1}'.format('Title:', self.title))
         print('{0: <19} {1}'.format('Author:', self.author))
         print('{0: <19} {1}'.format('Category:', self.category))
         print('{0: <19} {1}'.format('Publication year:', self.year))
 
         if self.quantity == 0:
-            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.RED, 'Sold out!', Books.WHITE))
+            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.RED, 'Sold out!',
+                                              Books.WHITE))
         elif self.quantity > 0:
-            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.GREEN, self.quantity, Books.WHITE))
+            print('{0: <19} {1}{2}{3}'.format('Available quantity:', Books.GREEN, self.quantity,
+                                              Books.WHITE))
 
         # if no feedback's
         if len(self.username) == 0:
@@ -155,8 +176,10 @@ book_2 = Books('MongoDB in Action', 'Johny Walker', 'IT', '2015', 3, '', '')
 all_books = [book_1, book_2]
 
 
-# print number and title for all books in list
 def menu_list():
+    '''
+    print number and title for all books in list
+    '''
     print('Books list:')
     print()
     for i in all_books:
@@ -164,14 +187,17 @@ def menu_list():
         i.print_info()
 
 
-# define function for select certain book
 def select_book():
+    '''
+    define function for select certain book
+    '''
     # fold input to protect from incorrect value type
     try:
         number = int(input('Select book: '))
         index = number - 1
         # print title of selected book
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, '.', sep=''))
         # print all information about book
         all_books[index].print_info()
         # propose to buy selected book
@@ -185,13 +211,16 @@ def select_book():
         return
 
 
-# show all feedback's about selected book
 def feedback_selected():
+    '''
+    show all feedback's about selected book
+    '''
     # fold input to protect from incorrect value type
     try:
         number = int(input('Select book: '))
         index = number - 1
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, '.', sep=''))
         all_books[index].print_info()
         # print all feedback's
         all_books[index].all_feedbacks()
@@ -204,13 +233,16 @@ def feedback_selected():
         return
 
 
-# define function for adding new feedback
 def new_feedback_selected():
+    '''
+    define function for adding new feedback
+    '''
     # fold input to protect from incorrect value type
     try:
         number = int(input('Select book: '))
         index = number - 1
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(), Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, '.', sep=''))
         all_books[index].print_info()
         # call add_feedback method for current book to add feedback
         all_books[index].add_feedback()
@@ -223,8 +255,10 @@ def new_feedback_selected():
         return
 
 
-# create function to adding new book
 def add_new_book():
+    '''
+    create function to adding new book
+    '''
     input_title = input('Input title: ')
     input_author = input('Input author: ')
     input_category = input('Input category: ')
