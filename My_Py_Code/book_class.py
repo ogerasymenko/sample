@@ -187,6 +187,19 @@ def menu_list():
         i.print_info()
 
 
+def error_print(err):
+    '''
+    print error message when exception happens
+    '''
+    print('=' * 19)
+    print('{0}{1}{2}'.format(Books.RED, 'Incorrect input!', Books.WHITE))
+    print('{0}{1}{2} {3}'.format(Books.RED, 'Error:', Books.WHITE, err))
+    print('=' * 19)
+    print()
+    # if exception happens return to main menu
+    return
+
+
 def select_book():
     '''
     define function for select certain book
@@ -202,13 +215,8 @@ def select_book():
         all_books[index].print_info()
         # propose to buy selected book
         all_books[index].sale_book()
-    except ValueError:
-        print('=' * 19)
-        print('{0}{1}{2}'.format(Books.RED, 'Input a digit!', Books.WHITE))
-        print('=' * 19)
-        print()
-        # if exception happens return to main menu
-        return
+    except (IndexError, ValueError) as err:
+        error_print(err)
 
 
 def feedback_selected():
@@ -224,13 +232,8 @@ def feedback_selected():
         all_books[index].print_info()
         # print all feedback's
         all_books[index].all_feedbacks()
-    except ValueError:
-        print('=' * 19)
-        print('{0}{1}{2}'.format(Books.RED, 'Input a digit!', Books.WHITE))
-        print('=' * 19)
-        print()
-        # if exception happens return to main menu
-        return
+    except (IndexError, ValueError) as err:
+        error_print(err)
 
 
 def new_feedback_selected():
@@ -246,13 +249,8 @@ def new_feedback_selected():
         all_books[index].print_info()
         # call add_feedback method for current book to add feedback
         all_books[index].add_feedback()
-    except ValueError:
-        print('=' * 19)
-        print('{0}{1}{2}'.format(Books.RED, 'Input a digit!', Books.WHITE))
-        print('=' * 19)
-        print()
-        # if exception happens return to main menu
-        return
+    except (IndexError, ValueError) as err:
+        error_print(err)
 
 
 def add_new_book():
