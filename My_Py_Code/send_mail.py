@@ -33,7 +33,6 @@ body = 'Date: {0}\nSend file:\n{1}\n{2}'.format(today, os.path.abspath(txt_filen
                                                 os.path.abspath(img_filename))
 # attach msg into message
 msg.attach(MIMEText(body, 'plain'))
-text = msg.as_string()
 
 # attach text file
 attachment = open(txt_filename)
