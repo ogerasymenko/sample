@@ -6,6 +6,8 @@ and send it to email
 
 import os
 import time
+
+
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -34,7 +36,7 @@ def main(url, fname):
     # close driver session
     driver.quit()
     # return path of saved file as result of function
-    return os.path.abspath('./shots/' + fname + '.png')
+    return fname + '.png'
 
 
 def file_rm(fname):
@@ -44,17 +46,16 @@ def file_rm(fname):
 link = 'mydomain.org/wordpress'
 link = link.lower()
 
+if link.startswith('http'):
+    pass
+else:
+    link = 'http://' + link
+
 u = urlparse(link)
 filename = u.netloc
 
-# check is link starts with http prefix
-if link.startswith('http'):
-    # call imported send_mail function with parameters
-    send_mail(main(link, filename), link)
-# if not add it
-else:
-    link = 'http://' + link
-    # call imported send_mail function with parameters
-    send_mail(main(link, filename), link)
+print(send_mail(main(link, filename), link))
+
 # call function to remove file
+time.sleep(3)
 file_rm(filename)

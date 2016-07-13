@@ -2,8 +2,13 @@
 Program to send email with text and image file in attachment
 '''
 
+
+import os
+import time
 import datetime
 import smtplib
+
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
@@ -18,7 +23,10 @@ def send_mail(path, url):
     # define recipient address
     to_addr = 'sashko@mydomain.org'
 
-    # point file to send
+    cwd = os.getcwd()
+    # chdir to folder with images
+    os.chdir('./shots')
+    # point on file to send
     img_filename = path
 
     # create the container for email message.
@@ -26,6 +34,7 @@ def send_mail(path, url):
     msg['From'] = from_addr
     msg['To'] = to_addr
     msg['Subject'] = 'Sreenshot'
+    msg['Date'] = time.ctime()
     # today will be use to show time of sending in message
     today = datetime.datetime.now().strftime('%d-%m-%Y %H:%M')
     # text in email body
@@ -35,11 +44,15 @@ def send_mail(path, url):
 
     # attach image
     with open(img_filename, 'rb') as f:
-         img = MIMEImage(f.read())
-         msg.attach(img)
+        img = MIMEImage(f.read())
+        img.add_header('Content-Disposition', 'attachment',
+                       filename=img_filename)
+        msg.attach(img)
 
     # convert it all to ascii string
     text = msg.as_string()
+    # return to main location
+    os.chdir(cwd)
 
     # initialize smtp connection to server, port
     server = smtplib.SMTP('mydomain.org', 25)
