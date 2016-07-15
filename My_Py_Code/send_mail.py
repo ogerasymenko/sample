@@ -33,7 +33,7 @@ def send_mail(path, url):
     msg = MIMEMultipart()
     msg['From'] = from_addr
     msg['To'] = to_addr
-    msg['Subject'] = 'Sreenshot'
+    msg['Subject'] = 'Screenshot'
     msg['Date'] = time.ctime()
     # today will be use to show time of sending in message
     today = datetime.datetime.now().strftime('%d-%m-%Y %H:%M')

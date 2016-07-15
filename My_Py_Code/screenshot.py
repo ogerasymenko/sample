@@ -43,19 +43,29 @@ def file_rm(fname):
     '''remove screenshot file from disk'''
     os.remove(os.path.abspath('./shots/' + fname + '.png'))
 
-link = 'mydomain.org/wordpress'
-link = link.lower()
+# read links from a file on disk
+with open('links.txt') as file:
+    for link in file:
+        link = link.strip('\n')
 
-if link.startswith('http'):
-    pass
-else:
-    link = 'http://' + link
+        # don't load commented links
+        if link.startswith('#'):
+            continue
 
-u = urlparse(link)
-filename = u.netloc
+        print("Read links: {}".format(link))
 
-print(send_mail(main(link, filename), link))
+        if link.startswith('http'):
+            print("Link with http, Ok.")
+            pass
+        else:
+            print("Link without http, add prefix.")
+            link = 'http://' + link
+    
+        u = urlparse(link)
+        filename = u.netloc
 
-# call function to remove file
-time.sleep(3)
-file_rm(filename)
+        print(send_mail(main(link, filename), link))
+        print()
+
+        time.sleep(2)
+        file_rm(filename)
