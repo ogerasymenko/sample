@@ -7,7 +7,7 @@ import re
 __author__ = 'sashko'
 
 
-def checkio(data):
+def pwd_check(data):
     x = False
     p = re.compile("[a-zA-Z0-9.,!?<>@#$%&*(){}_+=]+")
     # does password contain char in upper register
@@ -24,9 +24,9 @@ def checkio(data):
     return x
 
 
-assert checkio('A1213pokl') == False, "1st example"
-assert checkio('bAse730onE4@') == True, "2nd example"
-assert checkio('asasasasasasasaas') == False, "3rd example"
-assert checkio('QWERTYqwerty') == False, "4th example"
-assert checkio('123456123456') == False, "5th example"
-assert checkio('QwErTy911poqqqq') == True, "6th example"
+assert pwd_check('A1213pokl') == False, "1st example"
+assert pwd_check('bAse730onE4@') == True, "2nd example"
+assert pwd_check('asasasasasasasaas') == False, "3rd example"
+assert pwd_check('QWERTYqwerty') == False, "4th example"
+assert pwd_check('123456123456') == False, "5th example"
+assert pwd_check('QwErTy911poqqqq') == True, "6th example"
