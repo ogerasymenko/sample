@@ -4,6 +4,8 @@ buy a book, show books list with detail's,
 show and add feedback's to selected book.
 '''
 
+import pickle
+
 __author__ = 'sashko'
 
 
@@ -173,7 +175,10 @@ book_1 = Books('Amazon in Action', 'Steve Sampler', 'IT', '2016', 5, '', '')
 book_2 = Books('MongoDB in Action', 'Johny Walker', 'IT', '2015', 3, '', '')
 
 # create list to store all book's. on this list will be added new book's
-all_books = [book_1, book_2]
+# all_books = [book_1, book_2]
+
+with open('book_class.pkl', 'rb') as file:
+    all_books = pickle.load(file)
 
 
 def menu_list():
@@ -183,7 +188,7 @@ def menu_list():
     print('Books list:')
     print()
     for i in all_books:
-        print(all_books.index(i) + 1, '. ', Books.BLUE, i.title, Books.WHITE, '.', sep='')
+        print(all_books.index(i) + 1, '. ', Books.BLUE, i.title, Books.WHITE, sep='')
         i.print_info()
 
 
@@ -209,12 +214,13 @@ def select_book():
         number = int(input('Select book: '))
         index = number - 1
         # print title of selected book
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
-                                           Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, sep=''))
         # print all information about book
         all_books[index].print_info()
         # propose to buy selected book
         all_books[index].sale_book()
+
     except (IndexError, ValueError) as err:
         error_print(err)
 
@@ -227,8 +233,8 @@ def feedback_selected():
     try:
         number = int(input('Select book: '))
         index = number - 1
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
-                                           Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, sep=''))
         all_books[index].print_info()
         # print all feedback's
         all_books[index].all_feedbacks()
@@ -244,8 +250,8 @@ def new_feedback_selected():
     try:
         number = int(input('Select book: '))
         index = number - 1
-        print('{0}{1} {2}{3}{4}{5}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
-                                           Books.WHITE, '.', sep=''))
+        print('{0}{1} {2}{3}{4}'.format(number, '.', Books.BLUE, all_books[index].book_title(),
+                                           Books.WHITE, sep=''))
         all_books[index].print_info()
         # call add_feedback method for current book to add feedback
         all_books[index].add_feedback()
@@ -263,6 +269,7 @@ def add_new_book():
     # fold input to protect from incorrect value type
     try:
         input_year = int(input('Input publication year: '))
+        input_quantity = int(input('Input available quantity: '))
     except ValueError:
         print('=' * 19)
         print('{0}{1}{2}'.format(Books.RED, 'Input a digit!', Books.WHITE))
@@ -270,12 +277,32 @@ def add_new_book():
         print()
         # if exception happens return to main menu
         return
-    input_quantity = int(input('Input available quantity: '))
     # combine inputted values into new book
     new_book = Books(input_title, input_author, input_category, input_year, input_quantity, '', '')
     # add new book to the books list
     all_books.append(new_book)
     print()
+
+
+def del_book():
+    '''
+    define function to delete certain book
+    '''
+    # fold input to protect from incorrect value type
+    try:
+        number = int(input('Select book: '))
+        index = number - 1
+        # print title of selected book
+        print('=' * 19)
+        print('Book ', Books.BLUE, all_books[index].book_title(), Books.WHITE, ' deleted', sep='')
+        print('=' * 19)
+        # delete list item by index
+        del all_books[index]
+        print()
+
+    except (IndexError, ValueError) as err:
+        error_print(err)
+
 
 # generate menu
 while True:
@@ -293,7 +320,8 @@ while True:
             print('1. Buy a book')
             print('2. Show all feedback\'s')
             print('3. Add feedback')
-            print('4. Back')
+            print('4. Delete book')
+            print('5. Back')
 
             choice = input('> ')
             print()
@@ -313,6 +341,9 @@ while True:
                 # call function to select certain book from all books list
                 new_feedback_selected()
 
+            elif choice == '4':
+                del_book()
+
             # if other choice - exit from submenu
             else:
                 x = False
@@ -322,4 +353,6 @@ while True:
 
     # else exit from program
     else:
+        with open('book_class.pkl', 'wb') as output:
+            pickle.dump(all_books, output, pickle.HIGHEST_PROTOCOL)
         break

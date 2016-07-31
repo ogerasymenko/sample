@@ -8,6 +8,9 @@ pip install psutil
 import psutil
 import sys
 import os
+import time
+import socket
+from datetime import datetime
 
 
 def bytes2human(n):
@@ -51,7 +54,22 @@ def disk_usage():
             part.mountpoint))
 
 
+def users():
+    print('-----------')
+    print('LOGINED USERS\n-----------')
+    users = psutil.users()
+    for user in users:
+        print("%-12s %-7s %s  (%s)" % (
+            user.name,
+            user.terminal or '-',
+            datetime.fromtimestamp(user.started).strftime("%Y-%m-%d %H:%M"),
+            user.host))
+    print('-----------')
+
+
 def main():
+    print('-----------')
+    print('HOSTNAME\n-----------\n', socket.getfqdn(), sep='')
     print('-----------')
     print('MEMORY INFO\n-----------')
     pprint_ntuple(psutil.virtual_memory())
@@ -63,3 +81,4 @@ def main():
 if __name__ == '__main__':
     main()
     disk_usage()
+    users()
