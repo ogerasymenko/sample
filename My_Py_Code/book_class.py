@@ -36,6 +36,13 @@ class Books:
         # empty list for containing feedback's
         self.feeds = []
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self is None:
+            raise StopIteration
+
     def colors(self):
         '''
         define colors
@@ -113,10 +120,15 @@ class Books:
                 return
             print()
 
-            # comparison available items with inputed quantity
+            # comparison available items with inputted quantity
             if 0 < quantity <= items:
                 print('=' * 19)
-                print('Thank for buying ', Books.GREEN, quantity, Books.WHITE, ' books!', sep='')
+                b = None
+                if quantity == 1:
+                    b = ' book!'
+                else:
+                    b = ' books!'
+                print('Thank for buying ', Books.GREEN, quantity, Books.WHITE, b, sep='')
                 print('=' * 19)
                 print()
             elif quantity > items:
@@ -140,7 +152,7 @@ class Books:
 
     def book_title(self):
         '''
-        return boock's title
+        return boocks title
         '''
         return self.title
 
@@ -177,6 +189,7 @@ book_2 = Books('MongoDB in Action', 'Johny Walker', 'IT', '2015', 3, '', '')
 # create list to store all book's. on this list will be added new book's
 # all_books = [book_1, book_2]
 
+# use serialization to restore data from file
 with open('book_class.pkl', 'rb') as file:
     all_books = pickle.load(file)
 
@@ -306,7 +319,15 @@ def del_book():
 
 # generate menu
 while True:
-    print('1. Show all books')
+    print('Available books:')
+    for index, item in enumerate(all_books):
+        if item.quantity == 0:
+            continue
+        else:
+            print(index + 1, '. "', item.title, '" by ', item.author, sep='')
+    print()
+    print('Menu:')
+    print('1. Show details')
     print('2. Add new book')
     print('3. Exit')
 
@@ -353,6 +374,7 @@ while True:
 
     # else exit from program
     else:
+        # save data to file for next usage
         with open('book_class.pkl', 'wb') as output:
             pickle.dump(all_books, output, pickle.HIGHEST_PROTOCOL)
         break
