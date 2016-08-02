@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'tinymce',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -122,3 +123,61 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#TinyMCE widget configuration
+TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = '/static/tiny_mce/'
+TINYMCE_SPELLCHECKER = False
+TINYMCE_PLUGINS = [
+    'safari',
+    'table',
+    'advlink',
+    'advimage',
+    'iespell',
+    'inlinepopups',
+    'media',
+    'searchreplace',
+    'contextmenu',
+    'paste',
+    'wordcount'
+]
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme' : "advanced",
+    'plugins' : ",".join(TINYMCE_PLUGINS),
+    'language' : 'ru',
+    "theme_advanced_buttons1" : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect,|,spellchecker",
+    "theme_advanced_buttons2" : "cut,copy,paste,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,cleanup,code,|,forecolor,backcolor,|,insertfile,insertimage",
+    "theme_advanced_buttons3" : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_statusbar_location' : "bottom",
+    'theme_advanced_resizing' : True,
+    'table_default_cellpadding': 2,
+    'table_default_cellspacing': 2,
+    'cleanup_on_startup' : False,
+    'cleanup' : False,
+    'paste_auto_cleanup_on_paste' : False,
+    'paste_block_drop' : False,
+    'paste_remove_spans' : False,
+    'paste_strip_class_attributes' : False,
+    'paste_retain_style_properties' : "",
+    'forced_root_block' : False,
+    'force_br_newlines' : False,
+    'force_p_newlines' : False,
+    'remove_linebreaks' : False,
+    'convert_newlines_to_brs' : False,
+    'inline_styles' : False,
+    'relative_urls' : False,
+    'formats' : {
+        'alignleft' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-left'},
+        'aligncenter' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-center'},
+        'alignright' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-right'},
+        'alignfull' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-justify'},
+        'strikethrough' : {'inline' : 'del'},
+        'italic' : {'inline' : 'em'},
+        'bold' : {'inline' : 'strong'},
+        'underline' : {'inline' : 'u'}
+    },
+    'pagebreak_separator' : "",
+}

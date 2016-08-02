@@ -21,4 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^adminka/', admin.site.urls),
     url(r'', include('blog.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
 ]

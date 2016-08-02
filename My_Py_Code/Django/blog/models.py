@@ -3,12 +3,13 @@ from django.db import models
 # Create your models here.
 
 from django.utils import timezone
+from tinymce import models as tinymce_model
 
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    text = tinymce_model.HTMLField()
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
