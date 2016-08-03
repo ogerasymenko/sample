@@ -324,7 +324,7 @@ while True:
         if item.quantity == 0:
             continue
         else:
-            print(index + 1, '. "', item.title, '" by ', item.author, sep='')
+            print(index + 1, '. "', Books.BLUE, item.title, Books.WHITE, '" by ', item.author, sep='')
     print()
     print('Menu:')
     print('1. Show details')
