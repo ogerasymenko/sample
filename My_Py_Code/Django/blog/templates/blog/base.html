@@ -3,12 +3,25 @@
 
     <head>
         <title>*Django Test*</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+                <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<!--            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+                <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+               <style>
+                   body {
+                                background-color: #fbfbfb;
+                                display: flex;
+                                min-height: 100vh;
+                                flex-direction: column;
+                        }
+                   main {
+                                flex: 1 0 auto;
+                        }
+                </style>
+                {% block css %}
+                {% endblock %}
     </head>
-
     <body>
         <div class="page-header">
             {% if user.is_authenticated %}
@@ -19,20 +32,34 @@
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
-                {% block content %}
+                    {% block content %}
                     {% for post in posts %}
                         <div class="post">
-                        <div class="date">
-                            {{ post.published_date }}
+                            <h3><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+                            {{ post.text|safe }}
+                            <div class="date">
+                            </br>published: {{ post.published_date }}
+                            </div>
                         </div>
-                        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                        <p>{{ post.text|safe }}</p>
-                        </div>
+
                     {% endfor %}
-                {% endblock %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
-     </body>
 
+       <footer class="page-footer" style="padding-top: 0">
+       <div class="footer-copyright">
+           &nbsp;&nbsp;
+           © 2016 Sashko
+       <a class="grey-text text-lighten-4 right" href="http://10.47.1.82:8000">Home&nbsp;&nbsp;</a>
+       </div>
+       </footer>
+
+       <script type="text/javascript" src="{% static 'js/jquery-latest.min.js' %}"></script>
+       <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+       {% block js %}
+       {% endblock %}
+
+     </body>
 </html>

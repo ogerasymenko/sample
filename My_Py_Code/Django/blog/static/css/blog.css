@@ -1,6 +1,7 @@
 body {
     padding-left: 15px;
     font-family: 'Consolas';
+    font-size: 11pt;
 }
 
 .page-header {
@@ -24,7 +25,7 @@ h1, h2, h3, h4 {
 }
 
 .date {
-    float: buttom;
+    float: right;
     color: #828282;
 }
 
