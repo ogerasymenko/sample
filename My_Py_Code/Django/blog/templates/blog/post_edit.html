@@ -4,6 +4,8 @@
     <h3>New post</h3>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn waves-effect waves-light">Save</button>
+    <button class="save btn waves-effect waves-light" type="submit" name="action">Save
+        <i class="material-icons right">send</i>
+    </button>
     </form>
 {% endblock %}
