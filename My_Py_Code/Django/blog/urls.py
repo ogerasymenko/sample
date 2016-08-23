@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-from material.frontend import urls as frontend_urls
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
