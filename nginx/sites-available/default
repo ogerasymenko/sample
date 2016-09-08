@@ -8,7 +8,7 @@ server {
 
 	error_page 404 /404.html;
 	
-	location ~* \.(gif|jpg|png|ico)$ {
+	location ~* \.(js|css|gif|jp?g|png|ico)$ {
 	expires 30d;
 	}
 
