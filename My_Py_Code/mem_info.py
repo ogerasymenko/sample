@@ -34,7 +34,7 @@ def pprint_ntuple(nt):
 
 
 def disk_usage():
-    templ = "%-10s %7s %7s %7s %6s%% %7s  %s"
+    templ = "%-10s : %7s %7s %7s %6s%% %7s  %s"
     print('-----------')
     print('DISK INFO\n-----------')
     print(templ % ("Device", "Total", "Used", "Free", "Use ", "Type",
