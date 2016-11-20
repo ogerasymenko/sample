@@ -3,7 +3,6 @@ from xmlrpc.server import SimpleXMLRPCServer
 
 
 def list_dir(path):
-    # print("Removing files ", os.listdir(path))
     for (path, dir, file) in os.walk(path):
         for file_name in file:
             os.remove(os.path.join(path, file_name))
