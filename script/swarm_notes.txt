@@ -1,0 +1,13 @@
+# rm old images
+docker rm $(docker ps --filter=status=exited --filter=status=created -q)
+
+# start swarm service
+docker service create --name front-end -p 8000:80 --replicas 4 alex/app_v1
+
+# list services
+docker service ls
+
+# list services tasks
+docker service ps front-end
+
+# same image should be on all worker nodes

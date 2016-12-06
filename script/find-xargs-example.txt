@@ -1,0 +1,4 @@
+xargs is a very powerful command that takes output of a command and pass it as argument of another command.
+
+# find files with last access more than 7 days and print a list of them
+find /var/log/ -name '*.log' -atime +7 | xargs ls -lah

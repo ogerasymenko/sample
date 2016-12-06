@@ -1,0 +1,19 @@
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+rpm -ivh epel-release-7-8.noarch.rpm
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+yum update
+yum install -y python-pip mc htop mysql-server mysql-connector-python.x86_64 php php-mysql php-pdo php-gd php-mbstring httpd phpmyadmin
+               dhcp net-tool bind bind-utils bind-chroot subversion mod_dav_svn python-devel libffi-devel openssl-devel
+
+
+chmod +x /etc/rc.d/rc.local
+
+echo "iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE" >> /etc/rc.d/rc.local
+echo "iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE" >> /etc/rc.d/rc.local
+echo "iptables -t nat -A PREROUTING -p tcp --dport 3222 -j DNAT --to-destination 172.16.0.100" >> /etc/rc.d/rc.local
+
+pip install --upgrade pip
+pip install ansible yamllint

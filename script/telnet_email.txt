@@ -1,0 +1,64 @@
+---------------------------------------------------------
+Smtp Telnet — как отправить письмо с помощью smtp Telnet?
+---------------------------------------------------------
+
+Чтобы отправить письмо с помощью smtp Telnet, не обязательно использовать какой-то mail-клиент,
+или пользоваться веб-интерфейсом. Можно просто воспользоваться smtp Telnet. 
+Опишу как это можно сделать в случае, если SMPT — сервер не требует авторизации.
+
+Для этого нам нужны:
+    сама программа smtp Telnet;
+    адрес какого — то SMTP — сервера;
+    знание элементарных основ SMTP — протокола.
+
+Программа smtp Telnet является встроенной в большинство операционных систем.
+Как SMTP — сервер, можно использовать почтовый сервер вашего провайдера.
+Дальше за дело. Пишем в консоли:
+telnet yourSMTPserver.com 25
+
+Trying xxx.xxx.xxx.xxx …
+Connected to yourSMTPserver.com.
+Escape character is ‘^]’.
+220 yourSMTPserver.com, ESMTP Sendmail 8.14.2/8.14.2
+
+Так мы идем с SMTP — сервером через 25 й порт. 
+А дальше просто вводим команды (красным — команды, серым — пример ответа сервера):
+HELO host
+
+250 yourSMTPserver.com Hello host [xxx.xxx.xxx.xxx]
+
+Обратите внимание, команда HELO вводится с одной буквой L. Если вместо HELO ввести команду EHLO, 
+то после приветствия, сервер выведет список директив, которые он поддерживает. Вводим далее:
+MAIL From: <you@sender.com>
+
+250 OK
+
+где you@sender.com — адрес вашего ящика, с которого вы отправляете сообщение.
+
+RCPT To: <your_friend@destination.com>
+250 Accepted
+
+где your_friend@destination.com – адрес ящика, на который Вы хотите отправить сообщение с помощью smtp telnet.
+
+DATA
+354 Enter message, ending with «.» On a line by itself
+
+From: you@sender.com
+To: your_friend@destination.com
+Subject: testsubject
+testletter
+
+250 OK id = 1Olemw-0003QX-1i
+
+Все, что вводится после команды DATA — это содержание вашего сообщения. 
+Здесь уже поля From:, To:, и Subject: являются необязательными. 
+Заканчивается сообщение символом точка («.») в отдельной строке.
+
+quit
+
+221 relay5.uar.net closing connection
+
+Connection closed by foreign host.
+
+Выход.
+Вот так, сообщение отправлено.

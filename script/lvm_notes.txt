@@ -1,0 +1,5 @@
+# add 3 gigs to lvm
+lvextend -L +3G /dev/centos/root
+
+# extend fs
+xfs_growfs -d /dev/mapper/centos-root

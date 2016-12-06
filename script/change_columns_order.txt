@@ -1,0 +1,1 @@
+ALTER TABLE `country` CHANGE COLUMN `HeadOfState` `HeadOfState` CHAR(60) NULL AFTER `name` 

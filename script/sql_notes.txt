@@ -1,0 +1,10 @@
+CHANGE MASTER TO MASTER_HOST='172.16.0.1', MASTER_USER='slave_user', MASTER_PASSWORD='password', MASTER_LOG_FILE = 'master.000005', MASTER_LOG_POS = 154;
+
+CREATE USER 'sisuser'@'%' IDENTIFIED BY 'sispass';
+GRANT ALL PRIVILEGES ON sisdb.* TO 'sisuser'@'%';
+
+# ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
+SET GLOBAL validate_password_length=6;
+
+[mysqld]
+bind-address = 0.0.0.0
