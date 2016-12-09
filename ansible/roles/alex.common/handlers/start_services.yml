@@ -1,0 +1,5 @@
+---
+- name: Start nginx
+  service: name=nginx state=running
+- name: Start Docker service
+  service: name=docker state=running

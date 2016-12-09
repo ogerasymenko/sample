@@ -1,0 +1,4 @@
+---
+- command: cat /etc/hosts
+  register: hosts_info
+- debug: msg="{{ hosts_info.stdout_lines }}"

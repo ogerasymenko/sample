@@ -1,0 +1,4 @@
+---
+# tasks file for alex.common
+- include: 'install_packages.yml'
+- include: 'hosts_info.yml'

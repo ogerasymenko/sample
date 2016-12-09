@@ -1,0 +1,4 @@
+---
+# handlers file for alex.mysql
+- name: Start mysqld
+  service: name=mysqld state=running

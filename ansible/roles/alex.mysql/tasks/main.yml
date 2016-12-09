@@ -1,0 +1,6 @@
+---
+# tasks file for alex.mysql
+- name: Create my.cnf
+  template: src=.my.cnf dest=/root/.my.cnf
+- name: Check MySQL replication status
+  mysql_replication: mode=getslave config_file=~/.my.cnf
