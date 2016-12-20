@@ -3,3 +3,6 @@
   roles:
     - alex.common
     - alex.mysql
+- hosts: router
+  roles:
+    - alex.jenkins

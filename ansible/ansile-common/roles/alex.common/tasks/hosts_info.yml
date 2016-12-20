@@ -1,4 +1,4 @@
 ---
-- command: cat /etc/hosts
+- command: pip list
   register: hosts_info
 - debug: msg="{{ hosts_info.stdout_lines }}"

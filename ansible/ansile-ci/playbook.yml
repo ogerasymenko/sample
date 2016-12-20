@@ -1,0 +1,4 @@
+---
+- hosts: worker_1
+  roles:
+    - alex.ci

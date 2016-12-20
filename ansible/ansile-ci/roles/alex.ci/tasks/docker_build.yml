@@ -1,0 +1,22 @@
+---
+- shell: docker images | grep "172.16.0.100:5000/flask_app_" | awk '{ print $1 }'
+  register: image_version
+
+- debug: msg="{{ image_version.stdout_lines }}"
+
+- local_action: copy content="{{ image_version.stdout_lines }}" dest=/home/ansible-ci/docker_image_tag
+
+- local_action: shell python /home/ansible-ci/set_app_ver.py
+
+- debug: msg="{{ lookup('ini', 'tag section=tag file=docker_next_tag') }}"
+
+- name: Tag and push to docker hub
+  docker_image:
+    pull: no
+    path: /root/flask_app.git
+    name: "{{ lookup('ini', 'tag section=tag file=docker_next_tag') }}"
+    tag: latest
+
+- shell: docker push "{{ lookup('ini', 'tag section=tag  file=docker_next_tag') }}"
+
+- shell: docker service update --image "{{ lookup('ini', 'tag section=tag  file=docker_next_tag') }}" front-end

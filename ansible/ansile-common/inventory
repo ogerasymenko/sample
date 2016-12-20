@@ -1,0 +1,6 @@
+[router]
+localhost ansible_connection=local
+
+[workers]
+worker_1:3222
+worker_2:3222

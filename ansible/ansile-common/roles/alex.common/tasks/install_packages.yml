@@ -5,6 +5,7 @@
     - mc
     - nginx
     - mysql-community-devel
+    - git
 - name: Install PyMySQLClient
   pip: name=mysqlclient state=present
 - name: Add Docker repository

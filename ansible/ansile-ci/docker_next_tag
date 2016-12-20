@@ -1,0 +1,2 @@
+[command]
+command=docker build -t 172.16.0.100:5000/flask_app_v6 .
