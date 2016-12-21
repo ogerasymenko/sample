@@ -10,7 +10,7 @@
 
 - debug: msg="{{ lookup('ini', 'tag section=tag file=docker_next_tag') }}"
 
-- name: Tag and push to docker hub
+- name: Build and push to local registry
   docker_image:
     pull: no
     path: /root/flask_app.git
@@ -19,4 +19,5 @@
 
 - shell: docker push "{{ lookup('ini', 'tag section=tag  file=docker_next_tag') }}"
 
-- shell: docker service update --image "{{ lookup('ini', 'tag section=tag  file=docker_next_tag') }}" front-end
+- shell: docker service update --image "{{ lookup('ini', 'tag section=tag  file=docker_next_tag') }}" \
+         --update-parallelism 2 --update-delay 10s front-end
