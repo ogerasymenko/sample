@@ -3,23 +3,23 @@
 
 node /dev.*/ {
     user { 'new_user':
-        ensure => present,
-        groups => 'developers'
-        comment => 'New User',
-        password => '$1$kGu3KjX5$AM3iZGvwkmIpszKhJvUQb1'
+        ensure           => present,
+        groups           => 'developers',
+        comment          => 'New User',
+        password         => '$1$kGu3KjX5$AM3iZGvwkmIpszKhJvUQb1',
         password_max_age => '365',
         password_min_age => '0',
-        home => '/home/new_user',
-        managehome => true,
-        shell => '/bin/bash',
+        home             => '/home/new_user',
+        managehome       => true,
+        shell            => '/bin/bash',
     }
     file { '/home/new_user':
-        ensure => 'directory',
-        source => 'puppet:///modules/new_users_home_files/profiles',
+        ensure  => 'directory',
+        source  => 'puppet:///modules/new_users_home_files/profiles',
         recurse => true,
-        owner => 'new_user',
-        group => 'new_user',
-        mode => '640',
+        owner   => 'new_user',
+        group   => 'new_user',
+        mode    => '640',
     }
 }
 
