@@ -19,7 +19,11 @@ node /dev.*/ {
         recurse => true,
         owner   => 'new_user',
         group   => 'new_user',
+<<<<<<< HEAD
         mode    => '640',
+=======
+        mode    => '0755',
+>>>>>>> c0c7ad06a21cedbb2d61a7879a779d669e52f9e0
     }
 }
 
