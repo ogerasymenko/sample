@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Flask Test</title>
+                <meta name="description" content="Python vs Ruby vs PHP." />
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+                <meta property="og:title" content="Rich Link Preview" />
+                <meta property="og:description" content="Sashko's blog with Awesome reviews" />
+                <meta property="og:image" content="http://jupyter.pp.ua/images/preview.png" />        
+        
+                <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+                <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <style>
+                   body {
+                                background-color: #fbfbfb;
+                                display: flex;
+                                min-height: 100vh;
+                                flex-direction: column;
+                        }
+                   main {
+                                flex: 1 0 auto;
+                        }
+                </style>
+    </head>
+
+    <body>
+
+        <div class="page-header">
+            <h2><a href="/">Flask App</a></h2>
+        </div>
+        
+                 <div class="content">
+                 <div class="col-md-8">
+                     <div class="post"><h4>Students list:</h4>
+                        &nbsp;Name: Age
+                        <ul>{% for i in students_list %}
+                             <li>&nbsp;{{ i[0] }}: {{ i[1]}} <a href="/del/{{ i[2] }}">delete</a></li>
+                            {% endfor %}</ul>
+                        </div>
+
+                 </div> 
+                 </div>
+                            
+       <footer class="page-footer" style="padding-top: 0">
+           <div class="footer-copyright">
+              &nbsp;&nbsp;&copy;2016 Flask App
+           </div>
+       </footer>
+
+       <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+       <script type="text/javascript" src="js/materialize.min.js"></script>
+
+     </body>
+</html>
