@@ -1,0 +1,4 @@
+# add insecure local registry
+{
+  "insecure-registries": ["ubuntu16.mydomain.org"]
+}
