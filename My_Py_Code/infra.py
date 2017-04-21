@@ -9,7 +9,7 @@ def test_nginx_status(TestinfraBackend):
 def test_nginx_is_installed(Package):
     nginx = Package("nginx")
     assert nginx.is_installed
-    assert nginx.version.startswith("1.10.3")
+    assert nginx.version.startswith("1.10")
     
 def test_nginx_running_and_enabled(Service):
     nginx = Service("nginx")
