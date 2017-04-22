@@ -31,7 +31,7 @@ class Snake(object):
             self.body_list.append(Body(x - i, y))
 
         # snake head
-        self.body_list.append(Body(x, y, '0'))
+        self.body_list.append(Body(x, y, '@'))
         self.window = window
         # move snake to right when game starts
         self.direction = KEY_RIGHT
